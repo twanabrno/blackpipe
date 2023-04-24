@@ -1,0 +1,46 @@
+.login-body {
+  height: 100vh;
+  position: relative;
+  background-image:url(../assets/imgs/steel.png) ;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-form {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  margin: auto;
+  width: 500px;
+  padding: 40px 50px 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+  background-color: white;
+
+}
+
+.login-form img{
+  width: 45%;
+}
+
+.logout-btn {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 15px;
+}
+.logout-btn:hover {
+  color: white;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .login-form {
+    margin: auto;
+    width: 325px !important;
+    padding: 40px 25px 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+  }
+}

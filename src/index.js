@@ -1,17 +1,47 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import HttpApi from "i18next-http-backend";
+import en from "./langs/en";
+import ar from "./langs/ar";
+import krd from "./langs/krd";
+import RtlMui from "./components/RtlMui";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+i18n
+  .use(initReactI18next)
+  .use(LanguageDetector)
+  .use(HttpApi)
+  .init({
+    resources: {
+      en: en,
+      ar: ar,
+      krd: krd,
+    },
+    supportedLngs: ["en", "ar", "krd"],
+    fallbackLng: "en",
+    detection: {
+      order: ["cookie", "htmlTag", "localStorage", "path", "subdomain"],
+      caches: ["cookie"],
+    },
+  });
+
+const loadingMarkup = (
+  <div className="py4 text-center">
+    <h2> Loading... </h2>
+  </div>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <Suspense fallback={loadingMarkup}>
+    <BrowserRouter>
+    <RtlMui>
+      <App />
+    </RtlMui>
+    </BrowserRouter>
+  </Suspense>
+);
